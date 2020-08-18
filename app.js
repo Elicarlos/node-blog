@@ -1,6 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const Handlebars = require('handlebars')
 const handlebars = require('express-handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const mogoose = require('mongoose')
 const path = require('path')
 const app = express()
@@ -30,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Handlebars
-app.engine('handlebars', handlebars({ defaultLayout: 'main'}))
+app.engine('handlebars', handlebars({ defaultLayout: 'main',  handlebars: allowInsecurePrototypeAccess(Handlebars)}))
 app.set('view engine', 'handlebars')
 
 //Mongoose
